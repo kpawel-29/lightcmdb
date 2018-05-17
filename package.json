@@ -4,11 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --output-hashing=all --no-sourcemap"
   },
   "private": true,
   "dependencies": {
@@ -30,15 +31,18 @@
     "chartist": "0.11.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "2.4.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "express": "^4.16.3",
     "googleapis": "19.0.0",
     "jquery": "3.2.1",
     "moment": "2.18.1",
     "ng2-cytoscape": "^0.4.0",
+    "path": "^0.12.7",
     "perfect-scrollbar": "1.1.0",
     "rxjs": "^5.5.5",
+    "typescript": "^2.3.4",
     "web-animations-js": "^2.3.1",
-    "zone.js": "0.8.4",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
+    "zone.js": "0.8.4"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.1",
@@ -49,6 +53,7 @@
     "@types/jquery": "1.10.31",
     "@types/node": "6.0.73",
     "codelyzer": "2.0.0",
+    "enhanced-resolve": "^3.3.0",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "3.2.0",
     "karma": "1.4.1",
@@ -61,5 +66,9 @@
     "ts-node": "2.0.0",
     "tslint": "4.5.0",
     "typescript": "^2.3.4"
+  },
+  "engines": {
+    "node": "6.11.0",
+    "npm": "3.10.10"
   }
 }
