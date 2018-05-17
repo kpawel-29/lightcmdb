@@ -1,0 +1,67 @@
+<div class="col-md-12 text-right">
+    <button (click)="openModal()" class="btn btn-success"><i class="material-icons">add</i> Dodaj nowy</button>
+</div>
+<table class="table animated fadeIn">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>COMMAND</th>
+        <th>JOB TYPE</th>
+        <th>PLAYBOOK</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of tasks">
+        <td>{{task.id}}</td>
+        <td>{{task.name}}</td>
+        <td>{{task.command}}</td>
+        <td>{{task.jobType}}</td>
+        <td>{{task.playbook}}</td>
+        <td><button (click)="removeTask(task.id)" class="btn btn-danger btn-sm text-uppercase"><i class="material-icons">remove_circle</i></button> </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="modal" id="task-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">{{title}}</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newTask.name">
+                            </div>
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Command</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newTask.command">
+                            </div>
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Job type</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newTask.jobType">
+                            </div>
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Playbook</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newTask.playbook">
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addTask()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Dodaj
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {Observable} from "rxjs/Observable";
+import {NewMappingDto} from '../model/discovery/NewMappingDto';
+import {Job} from '../model/Job';
+import {Mapping} from '../model/Mapping';
+import {Scheduler} from '../model/Scheduler';
+import {Task} from '../model/Task';
+
+@Injectable()
+export class DiscoveryService {
+
+    constructor(private http: Http) {
+    }
+
+    getMapping(): Observable<Mapping[]> {
+        return this.http.get('http://212.237.24.83:8080/dbapi/webresources/mapping')
+            .map(res => res.json());
+    }
+
+    // http://212.237.24.83:8080/dbapi/webresources/application.wadl
+    addMapping(dto: NewMappingDto): Observable<any> {
+        return this.http.post('http://212.237.24.83:8080/dbapi/webresources/mapping', dto);
+    }
+
+    removeMapping(id: string): Observable<any> {
+        return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/mapping/' + id);
+    }
+
+    getJobs(): Observable<Job[]> {
+        return this.http.get('http://212.237.24.83:8080/dbapi/webresources/job')
+            .map(res => res.json());
+    }
+
+    addJob(dto: Job): Observable<any> {
+        return this.http.post('http://212.237.24.83:8080/dbapi/webresources/job', dto);
+    }
+
+    removeJob(id: string): Observable<any> {
+        return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/job/' + id);
+    }
+
+    getSchedulers(): Observable<Scheduler[]> {
+        return this.http.get('http://212.237.24.83:8080/dbapi/webresources/scheduler')
+            .map(res => res.json());
+    }
+
+    addScheduler(dto: Scheduler): Observable<any> {
+        return this.http.post('http://212.237.24.83:8080/dbapi/webresources/scheduler', dto);
+    }
+
+    removeScheduler(id: string): Observable<any> {
+        return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/scheduler/' + id);
+    }
+
+    addJobToScheduler(dto: any): Observable<any> {
+        return this.http.put(`http://212.237.24.83:8080/dbapi/webresources/scheduler/${dto.id}/addjob/${dto.jobid}`, null);
+    }
+
+    getTasks(): Observable<Task[]> {
+        return this.http.get('http://212.237.24.83:8080/dbapi/webresources/task')
+            .map(res => res.json());
+    }
+
+    addTask(dto: Task): Observable<any> {
+        return this.http.post('http://212.237.24.83:8080/dbapi/webresources/task', dto);
+    }
+
+    removeTask(id: string): Observable<any> {
+        return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/task/' + id);
+    }
+}

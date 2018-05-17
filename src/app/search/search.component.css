@@ -1,0 +1,47 @@
+.search-wrapper {
+    height: calc(100vh - 60px);
+}
+
+.main {
+    height: auto;
+}
+
+.result-list {
+    border-left: 2px solid #9acd324d;
+    /*background: #9acd324d;*/
+    height: calc(100vh - 60px);
+    overflow: scroll;
+}
+
+.graphic-interpretation {
+    border-bottom: 2px solid #9acd324d;
+    /*background: #ffff0052;*/
+    height: calc(100vh - 360px);
+}
+
+.graphic-interpretation .card {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+.attribute-list {
+    /*background: #ff000030;*/
+    height: 240px;
+    overflow: scroll;
+}
+/*.attribute-list .card-header {*/
+    /*position: fixed;*/
+    /*bottom: 300px;*/
+/*}*/
+
+.gray-on-hover:hover {
+    background: #eee;
+}
+
+ng2-cytoscape {
+    height: 100vh;
+    float: left;
+    width: 100%;
+    position: relative;
+}

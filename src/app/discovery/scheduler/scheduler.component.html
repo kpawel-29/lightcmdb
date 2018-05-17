@@ -1,0 +1,134 @@
+<div class="col-md-12 text-right">
+    <button (click)="openModal()" class="btn btn-success"><i class="material-icons">add</i> Dodaj nowy</button>
+</div>
+<table class="table animated fadeIn">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>DESCTIPTION</th>
+        <th>EXECUTION</th>
+        <th>INTERVAL</th>
+        <th class="text-center">JOB</th>
+        <th>STATUS</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let scheduler of schedulers">
+        <td>{{scheduler.id}}</td>
+        <td>{{scheduler.name}}</td>
+        <td>{{scheduler.description}}</td>
+        <td>{{scheduler.execution}}</td>
+        <td>{{scheduler.interval}}</td>
+        <td class="text-center">
+            <button (click)="openJobModal(scheduler.id)"
+                    class="btn btn-primary btn-sm text-uppercase"><i
+                    class="material-icons">add</i> dodaj joba</button>
+            <ul style="text-align: left;" *ngFor="let job of scheduler.job">
+                <li><strong>id: </strong>{{job.id}}</li>
+                <li><strong>name: </strong>{{job.name}}</li>
+                <li><strong>description: </strong>{{job.description}}</li>
+            </ul>
+        </td>
+        <td>
+            <button *ngIf="scheduler.status ==='active'"
+                    class="btn btn-success btn-sm text-uppercase"><i
+                    class="material-icons">done</i></button>
+            <button *ngIf="scheduler.status !=='active'" (click)="removeScheduler(scheduler.id)"
+                    class="btn btn-secondary btn-sm text-uppercase"><i
+                    class="material-icons">clear</i></button>
+        </td>
+        <td>
+            <button (click)="removeScheduler(scheduler.id)" class="btn btn-danger btn-sm text-uppercase"><i
+                    class="material-icons">remove_circle</i></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="modal" id="scheduler-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">{{title}}</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newScheduler.name">
+                            </div>
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Description</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newScheduler.description">
+                            </div>
+                            <div class="form-horizontal">
+                                <div class="row no-gutters">
+                                    <label style="padding: 22px 5px 0 15px; text-align: left;" class="col-md-3 col-form-label">Execution date</label>
+                                    <div class="col-md-3">
+                                        <input type="date" class="form-control" style="margin: -20px 0 0 -70px;"
+                                               [(ngModel)]="executionDate">
+                                    </div>
+                                    <label style="padding: 22px 5px 0 15px; text-align: left;" class="col-md-3 col-form-label">Execution time</label>
+                                    <div class="col-md-3">
+                                        <input type="time" class="form-control" style="margin: -20px 0 0 -70px;"
+                                               [(ngModel)]="executionTime">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">interval</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newScheduler.interval">
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addScheduler()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> dodaj
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="scheduler-job-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">{{title}}</h4>
+                <p class="category">Wybierz joba</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-black label-floating is-empty"
+                                 style="margin-top: 12px;">
+                                <label>Joby</label>
+                                <angular2-multiselect [data]="itemList"
+                                                      [(ngModel)]="selectedItems"
+                                                      [settings]="settings"
+                                                      (onSelect)="onItemSelect($event)"
+                                                      (onDeSelect)="OnItemDeSelect($event)"
+                                                      (onSelectAll)="onSelectAll($event)"
+                                                      (onDeSelectAll)="onDeSelectAll($event)"
+                                                      [ngModelOptions]="{standalone: true}">
+                                </angular2-multiselect>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addJobToScheduler()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Przypisz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

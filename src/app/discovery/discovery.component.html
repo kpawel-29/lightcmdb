@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-nav-tabs">
+            <div class="card-header" data-background-color="purple">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Wybierz typ:</span>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="">
+                                <a href="#job" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Job
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="#mapping" data-toggle="tab">
+                                    <i class="material-icons">code</i>
+                                    Mapping
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#scheduler" data-toggle="tab">
+                                    <i class="material-icons">cloud</i>
+                                    Scheduler
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#task" data-toggle="tab">
+                                    <i class="material-icons">build</i>
+                                    Task
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="tab-content">
+                    <div class="tab-pane " id="job">
+                        <app-job></app-job>
+                    </div>
+                    <div class="tab-pane active" id="mapping">
+                        <app-mapping></app-mapping>
+                    </div>
+                    <div class="tab-pane " id="scheduler">
+                        <app-scheduler></app-scheduler>
+                    </div>
+                    <div class="tab-pane " id="task">
+                        <app-task></app-task>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

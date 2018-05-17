@@ -1,0 +1,16 @@
+.gray-on-hover:hover {
+    background: #eee;
+    color: #fff;
+}
+
+li {
+    cursor: pointer;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.form-control-margin {
+    margin: -20px 0 0 -70px;
+}

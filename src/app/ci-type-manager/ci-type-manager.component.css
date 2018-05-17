@@ -1,0 +1,9 @@
+.gray-on-hover:hover {
+    background: #eee;
+    color: #fff;
+}
+
+li {
+    cursor: pointer;
+}
+

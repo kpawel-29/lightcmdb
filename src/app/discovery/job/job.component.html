@@ -1,0 +1,55 @@
+<div class="col-md-12 text-right">
+    <button (click)="openModal()" class="btn btn-success"><i class="material-icons">add</i> Dodaj nowy</button>
+</div>
+<table class="table animated fadeIn">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>DESCRIPTION</th>
+        <th>MAPPING</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let job of jobs">
+        <td>{{job.id}}</td>
+        <td>{{job.name}}</td>
+        <td>{{job.description}}</td>
+        <td>{{job.mapping.length}}</td>
+        <td><button (click)="removeJob(job.id)" class="btn btn-danger btn-sm text-uppercase"><i class="material-icons">remove_circle</i></button> </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="modal" id="job-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">{{title}}</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newJob.name">
+                            </div>
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Description</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newJob.description">
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addJob()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Dodaj
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

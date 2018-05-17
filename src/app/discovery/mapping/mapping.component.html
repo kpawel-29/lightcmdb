@@ -1,0 +1,48 @@
+<div class="col-md-12 text-right">
+    <button (click)="openModal()" class="btn btn-success"><i class="material-icons">add</i> Dodaj nowy</button>
+</div>
+<table class="table animated fadeIn">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th class="text-center">CI TYPE ID</th>
+        <th class="text-center">ATTRIBUTE</th>
+        <th class="text-center">TASK</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let mapping of mappings">
+        <td>{{mapping.id}}</td>
+        <td>{{mapping.ciTypeID}}</td>
+        <td>
+            <ul>
+                <li><strong>id: </strong>{{mapping.attribute.id}}</li>
+                <li><strong>name: </strong>{{mapping.attribute.name}}</li>
+                <li><strong>description: </strong>{{mapping.attribute.description}}</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li><strong>id: </strong>{{mapping.task.id}}</li>
+                <li><strong>command: </strong>{{mapping.task.command}}</li>
+                <li><strong>jobType: </strong>{{mapping.task.jobType}}</li>
+                <li><strong>name: </strong>{{mapping.task.name}}</li>
+                <li><strong>playbook: </strong>{{mapping.task.playbook}}</li>
+            </ul>
+        </td>
+        <td>
+            <button (click)="removeMapping(mapping.id)" class="btn btn-danger btn-sm text-uppercase"><i
+                    class="material-icons">remove_circle</i></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="modal" id="mapping-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+            <app-mapping-form></app-mapping-form>
+        </div>
+    </div>
+</div>
