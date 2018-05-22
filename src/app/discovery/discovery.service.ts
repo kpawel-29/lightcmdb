@@ -85,6 +85,10 @@ export class DiscoveryService {
         return this.http.post('http://212.237.24.83:8080/dbapi/webresources/task', dto);
     }
 
+    editTask(dto: Task): Observable<any> {
+        return this.http.put(`http://212.237.24.83:8080/dbapi/webresources/task/${dto.id}`, dto);
+    }
+
     removeTask(id: string): Observable<any> {
         return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/task/' + id);
     }

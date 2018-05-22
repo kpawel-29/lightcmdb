@@ -12,6 +12,9 @@ export class TaskComponent implements OnInit {
     public tasks: Task[] = [];
     public newTask = new Task();
 
+    public title = '';
+    public modalMode = 'create';
+
     constructor(private discoveryService: DiscoveryService) {
     }
 
@@ -27,11 +30,27 @@ export class TaskComponent implements OnInit {
     }
 
     openModal() {
+        this.modalMode = 'create';
+        this.title = 'Stwórz task';
+        $('#task-modal').modal('show', {});
+    }
+
+    openEditModal(task: Task) {
+        this.newTask = task;
+        this.modalMode = 'edit';
+        this.title = 'Edytuj dane taska';
         $('#task-modal').modal('show', {});
     }
 
     addTask() {
         this.discoveryService.addTask(this.newTask).subscribe(next => {
+            alert('ok');
+            this.initTasks();
+        }, err => alert('err'));
+    }
+
+    editTask() {
+        this.discoveryService.editTask(this.newTask).subscribe(next => {
             alert('ok');
             this.initTasks();
         }, err => alert('err'));

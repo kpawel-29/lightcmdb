@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let task of tasks">
-        <td>{{task.id}}</td>
+        <td><a href="javascript:void(0)" (click)="openEditModal(task)" >{{task.id}}</a></td>
         <td>{{task.name}}</td>
         <td>{{task.command}}</td>
         <td>{{task.jobType}}</td>
@@ -57,8 +57,11 @@
                             </div>
                         </div>
                     </div>
-                    <button (click)="addTask()" type="submit" class="btn btn-primary pull-right"><i
+                    <button *ngIf="modalMode === 'create'" (click)="addTask()" type="submit" class="btn btn-primary pull-right"><i
                             class="fa fa-check"></i> Dodaj
+                    </button>
+                    <button *ngIf="modalMode === 'edit'" (click)="editTask()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Zapisz
                     </button>
                 </div>
             </div>
