@@ -1,0 +1,111 @@
+<div class="col-md-12 text-right">
+    <button (click)="openModal()" class="btn btn-success"><i class="material-icons">add</i> Dodaj nowy</button>
+</div>
+<table class="table animated fadeIn">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th class="text-center">NAME</th>
+        <th class="text-center">IP RANGE</th>
+        <th class="text-center">SCHEDULER</th>
+        <th class="text-center"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let probe of probes">
+        <td><a href="javascript:void(0)" (click)="openEditModal(probe)">{{probe.id}}</a></td>
+        <td>{{probe.name}}</td>
+        <td class="text-center">
+            <button (click)="openIpRangeModal(probe.id)"
+                    class="btn btn-primary btn-sm text-uppercase"><i
+                    class="material-icons">add</i> przypisz IP range
+            </button>
+            <ul style="text-align: left;" *ngFor="let ip of probe.iprange">
+                <li><strong>id: </strong>{{ip.id}}</li>
+                <li><strong>name: </strong>{{ip.name}}</li>
+                <li><strong>start: </strong>{{ip.start}}</li>
+                <li><strong>stop: </strong>{{ip.stop}}</li>
+            </ul>
+        </td>
+        <td class="text-center">
+            <!--<button-->
+            <!--class="btn btn-primary btn-sm text-uppercase"><i-->
+            <!--class="material-icons">add</i> przypsz scheduler</button>-->
+            <ul style="text-align: left;" *ngFor="let sch of probe.scheduler">
+                <li><strong>id: </strong>{{sch.id}}</li>
+                <li><strong>name: </strong>{{sch.name}}</li>
+                <li><strong>description: </strong>{{sch.description}}</li>
+                <li><strong>status: </strong>{{sch.status}}</li>
+                <li><strong>execution: </strong>{{sch.execution}}</li>
+                <li><strong>interval: </strong>{{sch.interval}}</li>
+            </ul>
+        </td>
+        <td>
+            <button (click)="removeProbe(probe.id)" class="btn btn-danger btn-sm text-uppercase"><i
+                    class="material-icons">remove_circle</i></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="modal" id="probe-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">Stwórz nowy probe</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newProbe.name">
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addProbe()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Dodaj
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="edit-probe-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">Edytuj nazwę probe</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newProbe.name">
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="editProbeName()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Zapisz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="iprange-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card-body">
+            <app-iprange-form [probeId]="selectedProbeId" (added)="initProbes()"></app-iprange-form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header" data-background-color="blue">
+            <h4 class="title">Dodawanie ip range do proba</h4>
+            <p class="category">Wprowadź dane</p>
+        </div>
+        <div class="card-content">
+            <div class="row" *ngIf="probeId">
+                <label class="col-md-3 margin-top-15">Probe ID</label>
+                <div class="col-md-9">
+                    <!--<select (change)="ciTypeSelected($event, ciType.value)" #ciType class="form-control form-control-margin" name="end_hour" id="ciTypeSelect">-->
+                        <!--<option value="Wybierz"></option>-->
+                        <!--<option *ngFor="let ciType of citypes" value={{ciType.id}}>-->
+                            <!--{{ciType.name}}; {{// ciType.description}}; {{ciType.id}}-->
+                        <!--</option>-->
+                    <!--</select>-->
+                    <input type="text" class="form-control"
+                           [(ngModel)]="probeId" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 margin-top-15">Name</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="ipRangeDto.name">
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 margin-top-15">Start</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="ipRangeDto.start">
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 margin-top-15">Stop</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="ipRangeDto.stop">
+                </div>
+            </div>
+            <button (click)="addIpRangeToProbe()" type="submit" class="btn btn-primary pull-right"><i
+                    class="fa fa-check"></i> dodaj ip range do proba
+            </button>
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+</div>

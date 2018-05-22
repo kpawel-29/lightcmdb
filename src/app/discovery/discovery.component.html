@@ -6,17 +6,10 @@
                     <div class="nav-tabs-wrapper">
                         <span class="nav-tabs-title">Wybierz typ:</span>
                         <ul class="nav nav-tabs" data-tabs="tabs">
-                            <li class="">
-                                <a href="#job" data-toggle="tab">
-                                    <i class="material-icons">bug_report</i>
-                                    Job
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
                             <li class="active">
-                                <a href="#mapping" data-toggle="tab">
-                                    <i class="material-icons">code</i>
-                                    Mapping
+                                <a href="#probe" data-toggle="tab">
+                                    <i class="material-icons">explore</i>
+                                    Probe
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
@@ -24,6 +17,20 @@
                                 <a href="#scheduler" data-toggle="tab">
                                     <i class="material-icons">cloud</i>
                                     Scheduler
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#job" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Job
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#mapping" data-toggle="tab">
+                                    <i class="material-icons">code</i>
+                                    Mapping
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
@@ -41,10 +48,13 @@
 
             <div class="card-content">
                 <div class="tab-content">
+                    <div class="tab-pane active" id="probe">
+                        <app-probe></app-probe>
+                    </div>
                     <div class="tab-pane " id="job">
                         <app-job></app-job>
                     </div>
-                    <div class="tab-pane active" id="mapping">
+                    <div class="tab-pane " id="mapping">
                         <app-mapping></app-mapping>
                     </div>
                     <div class="tab-pane " id="scheduler">

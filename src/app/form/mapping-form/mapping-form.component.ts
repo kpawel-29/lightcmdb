@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CiTypeService} from '../../ci-type-manager/ci-type.service';
 import {DiscoveryService} from '../../discovery/discovery.service';
 import {Attribute} from '../../model/Attribute';
@@ -20,6 +20,8 @@ export class MappingFormComponent implements OnInit {
     addTask = false;
     newTask = null;
 
+    @Output() added = new EventEmitter<any>();
+
 
     constructor(private discoveryService: DiscoveryService,
                 private ciTypeService: CiTypeService) {
@@ -27,7 +29,6 @@ export class MappingFormComponent implements OnInit {
 
     ngOnInit() {
         this.getCiTypes();
-        // this.getAttributes();
         this.getTasks();
     }
 
@@ -39,13 +40,6 @@ export class MappingFormComponent implements OnInit {
             err => alert('błąd podczas pobierania citypes')
         );
     }
-
-    // private getAttributes() {
-    //     this.ciTypeService.attributes().subscribe(
-    //         next => this.attributes = next,
-    //         err => alert('błąd podczas pobierania attributes')
-    //     );
-    // }
 
     private getTasks() {
         this.discoveryService.getTasks().subscribe(
@@ -70,7 +64,10 @@ export class MappingFormComponent implements OnInit {
 
     addMapping() {
         this.discoveryService.addMapping(this.newMapping).subscribe(
-            next => alert('ok'),
+            next => {
+                alert('ok');
+                this.added.emit(true);
+            },
             err => alert('err')
         );
     }

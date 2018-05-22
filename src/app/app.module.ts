@@ -10,6 +10,7 @@ import {AppComponent} from './app.component';
 import {DiscoveryService} from './discovery/discovery.service';
 import {JobComponent} from './discovery/job/job.component';
 import {MappingComponent} from './discovery/mapping/mapping.component';
+import {ProbeComponent} from './discovery/probe/probe.component';
 import {SchedulerComponent} from './discovery/scheduler/scheduler.component';
 
 import {CiTypeManagerComponent} from './ci-type-manager/ci-type-manager.component';
@@ -31,6 +32,7 @@ import {NgCytoscapeComponent} from 'ng2-cytoscape/dist/ng2-cytoscape';
 import {CiFormComponent} from './form/ci-form/ci-form.component';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {CiTypeService} from './ci-type-manager/ci-type.service';
+import { IprangeFormComponent } from './form/iprange-form/iprange-form.component';
 
 @NgModule({
     declarations: [
@@ -51,7 +53,9 @@ import {CiTypeService} from './ci-type-manager/ci-type.service';
         JobComponent,
         SchedulerComponent,
         TaskComponent,
-        MappingFormComponent
+        MappingFormComponent,
+        ProbeComponent,
+        IprangeFormComponent
     ],
     imports: [
         BrowserModule,

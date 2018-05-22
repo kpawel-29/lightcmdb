@@ -2,8 +2,10 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import {NewMappingDto} from '../model/discovery/NewMappingDto';
+import {IpRange} from '../model/IpRange';
 import {Job} from '../model/Job';
 import {Mapping} from '../model/Mapping';
+import {Probe} from '../model/Probe';
 import {Scheduler} from '../model/Scheduler';
 import {Task} from '../model/Task';
 
@@ -68,5 +70,41 @@ export class DiscoveryService {
 
     removeTask(id: string): Observable<any> {
         return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/task/' + id);
+    }
+
+
+    getProbes(): Observable<Probe[]> {
+        return this.http.get('http://212.237.24.83:8080/dbapi/webresources/probe')
+            .map(res => res.json());
+    }
+
+    addProbe(dto: Probe): Observable<any> {
+        return this.http.post('http://212.237.24.83:8080/dbapi/webresources/probe', dto);
+    }
+
+    removeProbe(id: string): Observable<any> {
+        return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/probe/' + id);
+    }
+
+    editProbeName(probe: Probe): Observable<any> {
+        return this.http.put(`http://212.237.24.83:8080/dbapi/webresources/probe/${probe.id}`, probe);
+    }
+
+
+    getIpRanges(): Observable<IpRange[]> {
+        return this.http.get('http://212.237.24.83:8080/dbapi/webresources/iprange')
+            .map(res => res.json());
+    }
+
+    addIpRangeToProbe(probeId: string, ipRangeDto: IpRange): Observable<any> {
+        return this.http.put(`http://212.237.24.83:8080/dbapi/webresources/probe/${probeId}/addiprange`, ipRangeDto);
+    }
+
+    addIpRange(dto: Task): Observable<any> {
+        return this.http.post('http://212.237.24.83:8080/dbapi/webresources/iprange', dto);
+    }
+
+    removeIpRange(id: string): Observable<any> {
+        return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/iprange/' + id);
     }
 }
