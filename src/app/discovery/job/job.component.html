@@ -13,10 +13,18 @@
     </thead>
     <tbody>
     <tr *ngFor="let job of jobs">
-        <td>{{job.id}}</td>
+        <td><a href="javascript:void(0)" (click)="openEditModal(job)">{{job.id}}</a></td>
         <td>{{job.name}}</td>
         <td>{{job.description}}</td>
-        <td>{{job.mapping.length}}</td>
+        <td class="text-center">
+            <button (click)="openMappingToJobModal(job.id)"
+                    class="btn btn-primary btn-sm text-uppercase"><i
+                    class="material-icons">add</i> przypisz mapping do joba
+            </button>
+            <ul style="text-align: left;" *ngFor="let map of job.mapping">
+                <li><strong>mapping ID:</strong>{{map.id}}</li>
+            </ul>
+        </td>
         <td><button (click)="removeJob(job.id)" class="btn btn-danger btn-sm text-uppercase"><i class="material-icons">remove_circle</i></button> </td>
     </tr>
     </tbody>
@@ -45,8 +53,43 @@
                             </div>
                         </div>
                     </div>
-                    <button (click)="addJob()" type="submit" class="btn btn-primary pull-right"><i
+                    <button *ngIf="modalMode === 'create'" (click)="addJob()" type="submit" class="btn btn-primary pull-right"><i
                             class="fa fa-check"></i> Dodaj
+                    </button>
+                    <button *ngIf="modalMode === 'edit'" (click)="editJob()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Zapisz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="job-mapping-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">Przypisz mapping do joba</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="form-group form-black label-floating is-empty"
+                         style="margin-top: 12px;">
+                        <label class="col-md-3 margin-top-15">Mappingi</label>
+                        <div class="col-md-9">
+                            <select (change)="mappingSelected($event, map.value)" #map
+                                    class="form-control form-control-margin"
+                                    id="attributesSelect">
+                                <option value="Wybierz"></option>
+                                <option *ngFor="let map of mappings"
+                                        value={{map.id}}>
+                                    {{map.id}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <button (click)="addMappingToJob()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Dodaj mapping do joba
                     </button>
                 </div>
             </div>
