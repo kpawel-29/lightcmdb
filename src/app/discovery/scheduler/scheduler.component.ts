@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Job} from '../../model/Job';
+import {Probe} from '../../model/Probe';
 import {Scheduler} from '../../model/Scheduler';
 import {DiscoveryService} from '../discovery.service';
 
@@ -19,34 +20,51 @@ export class SchedulerComponent implements OnInit {
     public selectedSchedulerId = '';
     public addJobToSchedulerDto = new AddJobToSchedulerDto();
 
-    // multiselect
-    selectedItems = [];
-    itemList = [];
-    settings = {};
+    public probes: Probe[] = [];
+    public selectedProbeId: string;
 
+    public allSchedulers = false;
+
+    public title = '';
+    public modalMode = 'create';
 
     constructor(private discoveryService: DiscoveryService) {
     }
 
     ngOnInit() {
-        this.initScheduler();
+        this.initAllScheduler();
+        this.initProbes();
+    }
 
-        // multiselect
-        this.settings = {
-            text: 'Wybierz joba',
-            selectAllText: 'Zaznacz wszystkie',
-            unSelectAllText: 'Odznacz wszystkie',
-            classes: 'myclass custom-class',
-            enableSearchFilter: true,
-            selectionLimit: 1,
-            autoUnselect: true,
-            displayAllSelectedText: true,
-            showCheckAll: false,
-            showUncheckAll: false
-        };
+    initProbes() {
+        this.discoveryService.getProbes().subscribe(
+            next => this.probes = next,
+            err => alert('błąd podczas pobierania dancyh')
+        );
+    }
+
+    probeSelected($event: any, value: any) {
+        if (value === 'Wybierz') {
+            return;
+        }
+        this.schedulers = [];
+        this.selectedProbeId = value;
+        this.initScheduler();
     }
 
     initScheduler() {
+        this.allSchedulers = false;
+        this.discoveryService.getProbeSchedulers(this.selectedProbeId).subscribe(
+            next => {
+                this.initJobs();
+                this.schedulers = next;
+            },
+            err => alert('błąd podczas pobierania dancyh')
+        );
+    }
+
+    initAllScheduler() {
+        this.allSchedulers = true;
         this.discoveryService.getSchedulers().subscribe(
             next => {
                 this.initJobs();
@@ -60,7 +78,6 @@ export class SchedulerComponent implements OnInit {
         this.discoveryService.getJobs().subscribe(
             next => {
                 this.jobs = next;
-                this.parseAttributesToMultiselect(next);
             },
             err => alert('błąd podczas pobierania dancyh jobów')
         );
@@ -68,14 +85,24 @@ export class SchedulerComponent implements OnInit {
 
     openModal() {
         // this.newScheduler.job = null;
-        this.newScheduler.status = 'inactive';
-
+        this.newScheduler.status = 'active';
+        this.title = 'Stwórz scheduler';
+        this.modalMode = 'create';
         $('#scheduler-modal').modal('show', {});
     }
 
     openJobModal(id: string) {
         this.selectedSchedulerId = id;
+        this.title = 'Przypisz joba do schedulera';
         $('#scheduler-job-modal').modal('show', {});
+    }
+
+    openEditSchedulerModal(scheduler: Scheduler) {
+        this.selectedSchedulerId = scheduler.id;
+        this.title = 'Edytuj parametry schedulera';
+        this.modalMode = 'edit';
+        this.newScheduler = scheduler;
+        $('#scheduler-modal').modal('show', {});
     }
 
     addScheduler() {
@@ -88,7 +115,23 @@ export class SchedulerComponent implements OnInit {
 
         const execution = new Date(Date.UTC(+date[0], +date[1] - 1, +date[2], +time[0], +time[1]));
         this.newScheduler.execution = execution.toISOString();
-        this.discoveryService.addScheduler(this.newScheduler).subscribe(next => {
+        this.discoveryService.addScheduler(this.newScheduler, this.selectedProbeId).subscribe(next => {
+            alert('ok');
+            this.initScheduler();
+        }, err => alert('err'));
+    }
+
+    editScheduler() {
+        if (this.executionDate === '' || this.executionTime === '') {
+            alert('nie wybrano daty lub czasu wywołania (execution)');
+            return;
+        }
+        const date = this.executionDate.split('-'); //["2018", "04", "30"]
+        const time = this.executionTime.split(':'); //["12", "04"]
+
+        const execution = new Date(Date.UTC(+date[0], +date[1] - 1, +date[2], +time[0], +time[1]));
+        this.newScheduler.execution = execution.toISOString();
+        this.discoveryService.editScheduler(this.newScheduler, this.selectedProbeId).subscribe(next => {
             alert('ok');
             this.initScheduler();
         }, err => alert('err'));
@@ -101,40 +144,15 @@ export class SchedulerComponent implements OnInit {
         }, err => alert('err'));
     }
 
+    jobSelected(event: any, value: any) {
+        this.addJobToSchedulerDto.jobid = value;
+    }
+
     addJobToScheduler(id: string) {
-        this.addJobToSchedulerDto.id = this.selectedSchedulerId;
-        this.addJobToSchedulerDto.jobid = this.selectedItems[0].id;
         this.discoveryService.addJobToScheduler(this.addJobToSchedulerDto).subscribe(next => {
             alert('ok');
             this.initScheduler();
         }, err => alert('err'));
-    }
-
-// multiselect
-    onItemSelect(item: any) {
-        console.log(this.selectedItems);
-    }
-
-    OnItemDeSelect(item: any) {
-        console.log(item);
-        console.log(this.selectedItems);
-    }
-
-    onSelectAll(items: any) {
-        console.log(items);
-    }
-
-    onDeSelectAll(items: any) {
-        console.log(items);
-    }
-
-    private parseAttributesToMultiselect(attributes): void {
-        attributes.forEach(attr => {
-            this.itemList.push({
-                id: attr.id,
-                itemName: attr.name
-            });
-        });
     }
 }
 

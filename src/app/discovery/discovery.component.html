@@ -6,14 +6,14 @@
                     <div class="nav-tabs-wrapper">
                         <span class="nav-tabs-title">Wybierz typ:</span>
                         <ul class="nav nav-tabs" data-tabs="tabs">
-                            <li class="active">
+                            <li class="">
                                 <a href="#probe" data-toggle="tab">
                                     <i class="material-icons">explore</i>
                                     Probe
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
-                            <li class="">
+                            <li class="active">
                                 <a href="#scheduler" data-toggle="tab">
                                     <i class="material-icons">cloud</i>
                                     Scheduler
@@ -48,7 +48,7 @@
 
             <div class="card-content">
                 <div class="tab-content">
-                    <div class="tab-pane active" id="probe">
+                    <div class="tab-pane " id="probe">
                         <app-probe></app-probe>
                     </div>
                     <div class="tab-pane " id="job">
@@ -57,7 +57,7 @@
                     <div class="tab-pane " id="mapping">
                         <app-mapping></app-mapping>
                     </div>
-                    <div class="tab-pane " id="scheduler">
+                    <div class="tab-pane active" id="scheduler">
                         <app-scheduler></app-scheduler>
                     </div>
                     <div class="tab-pane " id="task">

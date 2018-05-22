@@ -1,7 +1,27 @@
 <div class="col-md-12 text-right">
-    <button (click)="openModal()" class="btn btn-success"><i class="material-icons">add</i> Dodaj nowy</button>
+    <button [disabled]="!selectedProbeId" (click)="openModal()" class="btn btn-success"><i
+            class="material-icons">add</i> Dodaj nowy
+    </button>
 </div>
-<table class="table animated fadeIn">
+<div class="row" style="border-bottom: 1px solid black;">
+    <div class="col-md-3">
+        <p>Wybierz probe</p>
+    </div>
+    <div class="col-md-9">
+        <select (change)="probeSelected($event, pro.value)" #pro class="form-control form-control-margin">
+            <option>Wybierz</option>
+            <option *ngFor="let probe of probes" value={{probe.id}}>
+                {{probe.name}}
+            </option>
+        </select>
+    </div>
+</div>
+<div class="">
+    <button (click)="initAllScheduler()" class="btn">Pobierz listę wszystkich schedulerów</button>
+    <h4 *ngIf="allSchedulers">Lista wszystkich schedulerów</h4>
+    <h4 *ngIf="!allSchedulers">Lista schedulerów przypisanych do probe: <strong>{{selectedProbeId}}</strong></h4>
+</div>
+<table *ngIf="schedulers.length" class="table animated fadeIn">
     <thead>
     <tr>
         <th>ID</th>
@@ -16,7 +36,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let scheduler of schedulers">
-        <td>{{scheduler.id}}</td>
+        <td><a href="javascript:void(0)" (click)="openEditSchedulerModal(scheduler)">{{scheduler.id}}</a></td>
         <td>{{scheduler.name}}</td>
         <td>{{scheduler.description}}</td>
         <td>{{scheduler.execution}}</td>
@@ -24,7 +44,8 @@
         <td class="text-center">
             <button (click)="openJobModal(scheduler.id)"
                     class="btn btn-primary btn-sm text-uppercase"><i
-                    class="material-icons">add</i> dodaj joba</button>
+                    class="material-icons">add</i> dodaj joba
+            </button>
             <ul style="text-align: left;" *ngFor="let job of scheduler.job">
                 <li><strong>id: </strong>{{job.id}}</li>
                 <li><strong>name: </strong>{{job.name}}</li>
@@ -35,7 +56,7 @@
             <button *ngIf="scheduler.status ==='active'"
                     class="btn btn-success btn-sm text-uppercase"><i
                     class="material-icons">done</i></button>
-            <button *ngIf="scheduler.status !=='active'" (click)="removeScheduler(scheduler.id)"
+            <button *ngIf="scheduler.status !=='active'"
                     class="btn btn-secondary btn-sm text-uppercase"><i
                     class="material-icons">clear</i></button>
         </td>
@@ -58,6 +79,11 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="form-group form-black">
+                                <label class="control-label">probe ID</label>
+                                <input disabled type="text" class="form-control"
+                                       [(ngModel)]="selectedProbeId">
+                            </div>
                             <div class="form-group form-black label-floating is-empty">
                                 <label class="control-label">Name</label>
                                 <input type="text" class="form-control"
@@ -70,12 +96,14 @@
                             </div>
                             <div class="form-horizontal">
                                 <div class="row no-gutters">
-                                    <label style="padding: 22px 5px 0 15px; text-align: left;" class="col-md-3 col-form-label">Execution date</label>
+                                    <label style="padding: 22px 5px 0 15px; text-align: left;"
+                                           class="col-md-3 col-form-label">Execution date</label>
                                     <div class="col-md-3">
                                         <input type="date" class="form-control" style="margin: -20px 0 0 -70px;"
                                                [(ngModel)]="executionDate">
                                     </div>
-                                    <label style="padding: 22px 5px 0 15px; text-align: left;" class="col-md-3 col-form-label">Execution time</label>
+                                    <label style="padding: 22px 5px 0 15px; text-align: left;"
+                                           class="col-md-3 col-form-label">Execution time</label>
                                     <div class="col-md-3">
                                         <input type="time" class="form-control" style="margin: -20px 0 0 -70px;"
                                                [(ngModel)]="executionTime">
@@ -90,8 +118,13 @@
                             </div>
                         </div>
                     </div>
-                    <button (click)="addScheduler()" type="submit" class="btn btn-primary pull-right"><i
-                            class="fa fa-check"></i> dodaj
+                    <button *ngIf="modalMode === 'create'" (click)="addScheduler()" type="submit"
+                            class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Dodaj
+                    </button>
+                    <button *ngIf="modalMode !== 'create'" (click)="editScheduler()" type="submit"
+                            class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Zapisz
                     </button>
                 </div>
             </div>
@@ -99,10 +132,10 @@
     </div>
 </div>
 <div class="modal" id="scheduler-job-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="card">
             <div class="card-header" data-background-color="blue">
-                <h4 class="title">{{title}}</h4>
+                <h4 class="title">Przypisz joba do schedulera</h4>
                 <p class="category">Wybierz joba</p>
             </div>
             <div class="card-body">
@@ -111,16 +144,18 @@
                         <div class="col-md-12">
                             <div class="form-group form-black label-floating is-empty"
                                  style="margin-top: 12px;">
-                                <label>Joby</label>
-                                <angular2-multiselect [data]="itemList"
-                                                      [(ngModel)]="selectedItems"
-                                                      [settings]="settings"
-                                                      (onSelect)="onItemSelect($event)"
-                                                      (onDeSelect)="OnItemDeSelect($event)"
-                                                      (onSelectAll)="onSelectAll($event)"
-                                                      (onDeSelectAll)="onDeSelectAll($event)"
-                                                      [ngModelOptions]="{standalone: true}">
-                                </angular2-multiselect>
+                                <label class="col-md-3 margin-top-15">Joby</label>
+                                <div class="col-md-9">
+                                    <select (change)="jobSelected($event, attr.value)" #attr
+                                            class="form-control form-control-margin"
+                                            id="attributesSelect">
+                                        <option value="Wybierz"></option>
+                                        <option *ngFor="let job of jobs"
+                                                value={{job.id}}>
+                                            {{job.name}} - {{job.description}}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

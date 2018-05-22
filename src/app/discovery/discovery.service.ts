@@ -46,9 +46,17 @@ export class DiscoveryService {
         return this.http.get('http://212.237.24.83:8080/dbapi/webresources/scheduler')
             .map(res => res.json());
     }
+    getProbeSchedulers(probeId: string): Observable<Scheduler[]> {
+        return this.http.get(`http://212.237.24.83:8080/dbapi/webresources/scheduler/active?probeID=${probeId}`)
+            .map(res => res.json());
+    }
 
-    addScheduler(dto: Scheduler): Observable<any> {
-        return this.http.post('http://212.237.24.83:8080/dbapi/webresources/scheduler', dto);
+    addScheduler(dto: Scheduler, probeId: string): Observable<any> {
+        return this.http.post(`http://212.237.24.83:8080/dbapi/webresources/scheduler?probeID=${probeId}`, dto);
+    }
+
+    editScheduler(dto: Scheduler, probeId: string): Observable<any> {
+        return this.http.put(`http://212.237.24.83:8080/dbapi/webresources/scheduler/${dto.id}`, dto);
     }
 
     removeScheduler(id: string): Observable<any> {
