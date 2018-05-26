@@ -1,9 +1,5 @@
-import {CI} from "./CI";
-import {CIType} from "./CIType";
-
 export class Configuration {
-    id: number;
+    id: string;
     name: string;
-    type?: string;
-    components: CIType[];
+    value: string;
 }

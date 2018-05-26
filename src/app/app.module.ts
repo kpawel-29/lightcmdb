@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app.routing';
 
 import {AppComponent} from './app.component';
+import {ConfigurationService} from './configuration/configuration.service';
 import {DiscoveryService} from './discovery/discovery.service';
 import {JobComponent} from './discovery/job/job.component';
 import {MappingComponent} from './discovery/mapping/mapping.component';
@@ -33,6 +34,7 @@ import {CiFormComponent} from './form/ci-form/ci-form.component';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {CiTypeService} from './ci-type-manager/ci-type.service';
 import { IprangeFormComponent } from './form/iprange-form/iprange-form.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +57,8 @@ import { IprangeFormComponent } from './form/iprange-form/iprange-form.component
         TaskComponent,
         MappingFormComponent,
         ProbeComponent,
-        IprangeFormComponent
+        IprangeFormComponent,
+        ConfigurationComponent
     ],
     imports: [
         BrowserModule,
@@ -71,7 +74,8 @@ import { IprangeFormComponent } from './form/iprange-form/iprange-form.component
         AuthenticationService,
         AuthGuard,
         CiTypeService,
-        DiscoveryService
+        DiscoveryService,
+        ConfigurationService
     ],
     bootstrap: [AppComponent]
 })

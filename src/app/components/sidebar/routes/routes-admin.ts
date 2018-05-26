@@ -14,6 +14,10 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         title: 'Infrastructure Settings',
         icon: 'content_paste'
     }, {
+        path: '/configuration',
+        title: 'Configuration',
+        icon: 'build'
+    }, {
         path: '/discovery',
         title: 'Discovery',
         icon: 'library_books'
