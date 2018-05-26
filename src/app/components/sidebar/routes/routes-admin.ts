@@ -6,10 +6,10 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         title: 'Ci Type Manager',
         icon: 'dashboard'
     }, {
-        path: '/relations',
-        title: 'Relationship Manager',
-        icon: 'person'
-    }, {
+        // path: '/relations',
+        // title: 'Relationship Manager',
+        // icon: 'person'
+    // }, {
         path: '/infrastructure-settings',
         title: 'Infrastructure Settings',
         icon: 'content_paste'

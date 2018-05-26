@@ -29,4 +29,13 @@ export class CiTypeService {
         return this.http.get('http://212.237.24.83:8080/dbapi/webresources/citype').map(res => res.json());
     }
 
+    addAtributeToCiType(ciTypeId: string, attrId: string) {
+
+    }
+
+    createCiType(dto: any) {
+
+    }
+
+
 }

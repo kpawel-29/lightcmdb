@@ -19,9 +19,7 @@ export class CiTypeManagerComponent implements OnInit {
     private types: string[] = [];
 
     selected = '';
-    // http://212.237.24.83:8080/dbapi/webresources/dbapi.dbapi.relationship
     CIAttributes: Attribute[] = [];
-    // createURI = 'http://localhost:8080/dbapi/webresources/dbapi.dbapi.citype';
     createURI = 'http://212.237.24.83:8080/dbapi/webresources/citype';
     modalTitle = 'Utwórz nowy CI';
 
