@@ -55,6 +55,7 @@ export class DiscoveryService {
         return this.http.get('http://212.237.24.83:8080/dbapi/webresources/scheduler')
             .map(res => res.json());
     }
+
     getProbeSchedulers(probeId: string): Observable<Scheduler[]> {
         return this.http.get(`http://212.237.24.83:8080/dbapi/webresources/scheduler/active?probeID=${probeId}`)
             .map(res => res.json());
@@ -127,5 +128,11 @@ export class DiscoveryService {
 
     removeIpRange(id: string): Observable<any> {
         return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/iprange/' + id);
+    }
+
+    editIpRange(dto: IpRange): Observable<any> {
+        return this.http.put(`http://212.237.24.83:8080/dbapi/webresources/iprange/${dto.id}`, {
+            'name': dto.name, 'start': dto.start, 'stop': dto.stop
+        }).map(res => res.json());
     }
 }

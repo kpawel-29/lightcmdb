@@ -13,6 +13,7 @@ export class ProbeComponent implements OnInit {
 
     public probes: Probe[] = [];
     public newProbe = new Probe();
+    public dtoIprange = new IpRange();
 
     public selectedProbeId: string;
 
@@ -41,6 +42,11 @@ export class ProbeComponent implements OnInit {
         $('#edit-probe-modal').modal('show', {});
     }
 
+    openEditIpRangeModal(ipRange: IpRange) {
+        this.dtoIprange = ipRange;
+        $('#edit-iprange-modal').modal('show', {});
+    }
+
     openIpRangeModal(id: string) {
         this.selectedProbeId = id;
         $('#iprange-modal').modal('show', {});
@@ -63,9 +69,25 @@ export class ProbeComponent implements OnInit {
         );
     }
 
+    removeIpRange(id: string) {
+        this.discoveryService.removeIpRange(id).subscribe(
+            next => {
+                alert('usunięto ip range');
+                this.initProbes();
+            },
+            err => alert('błąd podczas usuwania ip range')
+        );
+    }
 
     editProbeName() {
         this.discoveryService.editProbeName(this.newProbe).subscribe(next => {
+            alert('ok');
+            this.initProbes();
+        }, err => alert('err'));
+    }
+
+    editIpRange() {
+        this.discoveryService.editIpRange(this.dtoIprange).subscribe(next => {
             alert('ok');
             this.initProbes();
         }, err => alert('err'));
