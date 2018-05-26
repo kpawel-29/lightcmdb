@@ -6,36 +6,36 @@
                     <div class="nav-tabs-wrapper">
                         <span class="nav-tabs-title">Wybierz typ:</span>
                         <ul class="nav nav-tabs" data-tabs="tabs">
-                            <li class="">
-                                <a href="#probe" data-toggle="tab">
+                            <li class="" [class.active]="selected === 'probe'">
+                                <a href="javascript:void(0)" data-toggle="tab" (click)="selected = 'probe'">
                                     <i class="material-icons">explore</i>
                                     Probe
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
-                            <li class="">
-                                <a href="#scheduler" data-toggle="tab">
+                            <li class="" [class.active]="selected === 'scheduler'">
+                                <a href="javascript:void(0)" data-toggle="tab" (click)="selected = 'scheduler'">
                                     <i class="material-icons">cloud</i>
                                     Scheduler
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
-                            <li class="">
-                                <a href="#job" data-toggle="tab">
+                            <li class="" [class.active]="selected === 'job'">
+                                <a href="javascript:void(0)" data-toggle="tab" (click)="selected = 'job'">
                                     <i class="material-icons">bug_report</i>
                                     Job
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
-                            <li class="">
-                                <a href="#mapping" data-toggle="tab">
+                            <li class="" [class.active]="selected === 'mapping'">
+                                <a href="javascript:void(0)" data-toggle="tab" (click)="selected = 'mapping'">
                                     <i class="material-icons">code</i>
                                     Mapping
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
-                            <li class="active">
-                                <a href="#task" data-toggle="tab">
+                            <li class="" [class.active]="selected === 'task'">
+                                <a href="javascript:void(0)" data-toggle="tab" (click)="selected = 'task'">
                                     <i class="material-icons">build</i>
                                     Task
                                     <div class="ripple-container"></div>
@@ -48,20 +48,20 @@
 
             <div class="card-content">
                 <div class="tab-content">
-                    <div class="tab-pane " id="probe">
-                        <app-probe></app-probe>
+                    <div class="tab-pane " id="probe" [class.active]="selected === 'probe'">
+                        <app-probe *ngIf="selected === 'probe'"></app-probe>
                     </div>
-                    <div class="tab-pane " id="job">
-                        <app-job></app-job>
+                    <div class="tab-pane " id="job" [class.active]="selected === 'job'">
+                        <app-job *ngIf="selected === 'job'"></app-job>
                     </div>
-                    <div class="tab-pane " id="mapping">
-                        <app-mapping></app-mapping>
+                    <div class="tab-pane " id="mapping" [class.active]="selected === 'mapping'">
+                        <app-mapping *ngIf="selected === 'mapping'"></app-mapping>
                     </div>
-                    <div class="tab-pane " id="scheduler">
-                        <app-scheduler></app-scheduler>
+                    <div class="tab-pane " id="scheduler" [class.active]="selected === 'scheduler'">
+                        <app-scheduler *ngIf="selected === 'scheduler'"></app-scheduler>
                     </div>
-                    <div class="tab-pane active" id="task">
-                        <app-task></app-task>
+                    <div class="tab-pane " id="task" [class.active]="selected === 'task'">
+                        <app-task *ngIf="selected === 'task'"></app-task>
                     </div>
                 </div>
             </div>
