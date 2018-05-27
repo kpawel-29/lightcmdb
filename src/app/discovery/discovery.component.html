@@ -13,6 +13,13 @@
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
+                            <li [class.active]="selected === 'iprange'">
+                                <a href="javascript:void(0)" data-toggle="tab" (click)="selected = 'iprange'">
+                                    <i class="material-icons">language</i>
+                                    IpRange
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
                             <li [class.active]="selected === 'scheduler'">
                                 <a href="javascript:void(0)" data-toggle="tab" (click)="selected = 'scheduler'">
                                     <i class="material-icons">cloud</i>
@@ -50,6 +57,9 @@
                 <div class="tab-content">
                     <div class="tab-pane" id="probe" [class.active]="selected === 'probe'">
                         <app-probe *ngIf="selected === 'probe'"></app-probe>
+                    </div>
+                    <div class="tab-pane" id="iprange" [class.active]="selected === 'iprange'">
+                        <app-iprange *ngIf="selected === 'iprange'"></app-iprange>
                     </div>
                     <div class="tab-pane" id="job" [class.active]="selected === 'job'">
                         <app-job *ngIf="selected === 'job'"></app-job>

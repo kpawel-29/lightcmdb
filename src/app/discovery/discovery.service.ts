@@ -122,8 +122,8 @@ export class DiscoveryService {
         return this.http.put(`http://212.237.24.83:8080/dbapi/webresources/probe/${probeId}/addiprange`, ipRangeDto);
     }
 
-    addIpRange(dto: Task): Observable<any> {
-        return this.http.post('http://212.237.24.83:8080/dbapi/webresources/iprange', dto);
+    createIpRange(dto: IpRange, probeId: string): Observable<any> {
+        return this.http.post(`http://212.237.24.83:8080/dbapi/webresources/iprange?probeID=${probeId}`, dto);
     }
 
     removeIpRange(id: string): Observable<any> {

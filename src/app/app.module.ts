@@ -9,6 +9,7 @@ import {AppRoutingModule} from './app.routing';
 import {AppComponent} from './app.component';
 import {ConfigurationService} from './configuration/configuration.service';
 import {DiscoveryService} from './discovery/discovery.service';
+import {IprangeComponent} from './discovery/iprange/iprange.component';
 import {JobComponent} from './discovery/job/job.component';
 import {MappingComponent} from './discovery/mapping/mapping.component';
 import {ProbeComponent} from './discovery/probe/probe.component';
@@ -58,7 +59,8 @@ import { ConfigurationComponent } from './configuration/configuration.component'
         MappingFormComponent,
         ProbeComponent,
         IprangeFormComponent,
-        ConfigurationComponent
+        ConfigurationComponent,
+        IprangeComponent,
     ],
     imports: [
         BrowserModule,

@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./discovery.component.css']
 })
 export class DiscoveryComponent implements OnInit {
-    public selected = 'probe'; // probe | job | mapping | scheduler | task
+    public selected = 'probe'; // probe | job | mapping | scheduler | task | iprange
 
     constructor() {
     }

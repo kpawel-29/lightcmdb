@@ -1,0 +1,117 @@
+<div class="col-md-12 text-right">
+    <button (click)="openCreateModal()" class="btn btn-success"><i class="material-icons">add</i> Dodaj nowy</button>
+</div>
+<table class="table animated fadeIn">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th class="text-center">NAME</th>
+        <th class="text-center">START</th>
+        <th class="text-center">STOP</th>
+        <th class="text-center"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ip of ipranges">
+        <td><a href="javascript:void(0)" (click)="openEditIpRangeModal(ip)">{{ip.id}}</a></td>
+        <td class="text-center">{{ip.name}}</td>
+        <td class="text-center">{{ip.start}}</td>
+        <td class="text-center">{{ip.stop}}</td>
+        <td>
+            <button (click)="removeIpRange(ip.id)" class="btn btn-danger btn-sm text-uppercase"><i
+                    class="material-icons">remove_circle</i></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="modal" id="create-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">Stwórz nowy ip range</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <label class="col-md-3 margin-top-15">Probe</label>
+                        <div class="col-md-5">
+                            <select (change)="probeSelected($event, probe.value)" #probe class="form-control form-control-margin">
+                                <option value="Wybierz"></option>
+                                <option *ngFor="let probe of probes" value={{probe.id}}>
+                                    {{probe.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-black ">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newIprange.name">
+                            </div>
+                            <div class="form-group form-black ">
+                                <label class="control-label">Start</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newIprange.start">
+                            </div>
+                            <div class="form-group form-black ">
+                                <label class="control-label">Stop</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="newIprange.stop">
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="createIprange()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Dodaj
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="edit-iprange-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">Edytuj iprange</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-black">
+                                <label class="control-label">ID</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="dtoIprange.id" disabled>
+                            </div>
+                            <div class="form-group form-black">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="dtoIprange.name">
+                            </div>
+                            <div class="form-group form-black">
+                                <label class="control-label">Start</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="dtoIprange.start">
+                            </div>
+                            <div class="form-group form-black">
+                                <label class="control-label">Stop</label>
+                                <input type="text" class="form-control"
+                                       [(ngModel)]="dtoIprange.stop">
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="editIpRange()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Zapisz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
