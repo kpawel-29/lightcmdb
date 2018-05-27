@@ -37,5 +37,8 @@ export class CiTypeService {
 
     }
 
+    removeAttribute(id: string): Observable<any> {
+        return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/attributes/' + id).map(res => res.json());
+    }
 
 }

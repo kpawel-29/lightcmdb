@@ -20,14 +20,17 @@
                     <th>Nazwa</th>
                     <th>Nazwa wyświetlana</th>
                     <th>Opis</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let type of CIAttributes" class="gray-on-hover">
-                    <td>{{type.id}}</td>
-                    <td>{{type.name}}</td>
-                    <td>{{type.viewName}}</td>
-                    <td>{{type.description}}</td>
+                <tr *ngFor="let attr of selected.attributesCollection" class="gray-on-hover">
+                    <td>{{attr.id}}</td>
+                    <td>{{attr.name}}</td>
+                    <td>{{attr.viewName}}</td>
+                    <td>{{attr.description}}</td>
+                    <td><button (click)="removeAttribute(attr.id)" class="btn btn-danger btn-sm text-uppercase"><i
+                            class="material-icons">remove_circle</i></button></td>
                 </tr>
                 </tbody>
             </table>
@@ -38,9 +41,9 @@
                 <hr/>
             </div>
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let type of types"
-                    [class.list-group-item-success]="selected === type" (click)="changeSelected(type)">
-                    {{type}}
+                <li class="list-group-item" *ngFor="let ci of citypes"
+                    [class.list-group-item-success]="selected === ci" (click)="changeSelected(ci)">
+                    {{ci.name}}, {{ci.description}}
                 </li>
             </ul>
         </div>
