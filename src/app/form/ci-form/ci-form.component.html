@@ -59,28 +59,28 @@
                 </div>
             </div>
             <div *ngIf="addAttribute" class="row animated fadeIn" style="border: 2px dashed #999;">
-                <div class="col-md-4">
+                <div class="col-md-9">
                     <div class="form-group form-black label-floating is-empty">
                         <label class="control-label">Nazwa</label>
                         <input type="text" class="form-control"
                                [(ngModel)]="newAttribute.name">
                     </div>
                 </div>
+                <!--<div class="col-md-3">-->
+                    <!--<div class="form-group form-black label-floating is-empty">-->
+                        <!--<label class="control-label">Opis</label>-->
+                        <!--<input type="text" class="form-control"-->
+                               <!--[(ngModel)]="newAttribute.description">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-3">-->
+                    <!--<div class="form-group form-black label-floating is-empty">-->
+                        <!--<label class="control-label">Nazwa wyświetlana</label>-->
+                        <!--<input type="text" class="form-control"-->
+                               <!--[(ngModel)]="newAttribute.viewName">-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="col-md-3">
-                    <div class="form-group form-black label-floating is-empty">
-                        <label class="control-label">Opis</label>
-                        <input type="text" class="form-control"
-                               [(ngModel)]="newAttribute.description">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group form-black label-floating is-empty">
-                        <label class="control-label">Nazwa wyświetlana</label>
-                        <input type="text" class="form-control"
-                               [(ngModel)]="newAttribute.viewName">
-                    </div>
-                </div>
-                <div class="col-md-2">
                     <div class="form-group form-black label-floating is-empty">
                         <button (click)="createNewAttribute()" class="btn btn-xs btn-secondary"><i class="fa fa-plus"></i>
                         nowy atrybut</button>

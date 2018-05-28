@@ -2,16 +2,11 @@ import {Attribute} from './Attribute';
 import {CI} from "./CI";
 
 export class CIType {
-    id: number;
+    id: string;
     parentId: any;
     attributesCollection?: Attribute[];
+    fatherID: CIType;
     display_name?: string;
     name: string;
-    type?: string;
     description?: string;
-    default?: string;
-    visiblity?: boolean;
-    editable?: boolean;
-    components?: CIType[];
-    items?: CI[];
 }
