@@ -47,7 +47,7 @@ export class IprangeComponent implements OnInit {
     }
 
     createIprange() {
-        this.discoveryService.createIpRange(this.dtoIprange, this.selectedProbeId).subscribe(
+        this.discoveryService.createIpRange(this.newIprange, this.selectedProbeId).subscribe(
             next => {
                 alert('ok');
                 this.initIpranges();

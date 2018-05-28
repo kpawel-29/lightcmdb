@@ -93,6 +93,7 @@ export class SchedulerComponent implements OnInit {
 
     openJobModal(id: string) {
         this.selectedSchedulerId = id;
+        this.addJobToSchedulerDto.id = id;
         this.title = 'Przypisz joba do schedulera';
         $('#scheduler-job-modal').modal('show', {});
     }

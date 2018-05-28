@@ -21,7 +21,7 @@
     <h4 *ngIf="allSchedulers">Lista wszystkich schedulerów</h4>
     <h4 *ngIf="!allSchedulers">Lista schedulerów przypisanych do probe: <strong>{{selectedProbeId}}</strong></h4>
 </div>
-<table *ngIf="schedulers.length" class="table animated fadeIn">
+<table *ngIf="schedulers" class="table animated fadeIn">
     <thead>
     <tr>
         <th>ID</th>

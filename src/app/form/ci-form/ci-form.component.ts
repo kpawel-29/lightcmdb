@@ -97,7 +97,7 @@ export class CiFormComponent implements OnInit {
     }
 
     createNewAttribute() {
-        this.http.post('http://212.237.24.83:8080/dbapi/webresources/dbapi.dbapi.attributes', this.newAttribute)
+        this.http.post('http://212.237.24.83:8080/dbapi/webresources/attributes', this.newAttribute)
             .subscribe(ok => console.log(ok), err => console.log(err), () => {
                 this.addAttribute = false;
                 this.getAttributes();
