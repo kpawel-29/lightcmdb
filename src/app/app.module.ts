@@ -5,7 +5,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {NgCytoscapeComponent} from 'ng2-cytoscape/dist/ng2-cytoscape';
-import {NgxTreeSelectModule} from 'ngx-tree-select';
 import {TreeviewModule} from 'ngx-treeview';
 
 import {AppComponent} from './app.component';
