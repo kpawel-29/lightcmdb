@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Http} from "@angular/http";
 import {CiTypeService} from "../../ci-type-manager/ci-type.service";
+import {CIType} from '../../model/CIType';
 
 
 @Component({
@@ -27,6 +28,15 @@ export class CiFormComponent implements OnInit {
 
     @Input()
     headerColor: string;
+
+    @Input()
+    modalMode: string; // createCI | addAttribute
+
+    @Input()
+    fatherID: string;
+
+    @Input()
+    selectedCiType: CIType;
 
     constructor(private ciTypeService: CiTypeService,
                 private http: Http) {
@@ -59,20 +69,6 @@ export class CiFormComponent implements OnInit {
             });
         });
     }
-
-// {
-//     "description":"desc",
-//     "id":0,
-//     "name":"name",
-//     "viewName":"viewname"
-// }
-//
-// {
-//     "description":"desc2"
-//     ,"id":1,
-//     "name":"name2",
-//     "viewName":"viewname2"
-// }
 
     onItemSelect(item: any) {
         console.log(this.selectedItems);
@@ -108,37 +104,33 @@ export class CiFormComponent implements OnInit {
     createCi() {
         this.selectedItems.forEach(item => {
             const attribute = this.attributes.find(a => a.id === item.id);
-            this.newCI.attributesCollection.push(attribute);
+            // this.newCI.attributesCollection.push(attribute);
         });
 
-        this.http.post(this.createURI, this.newCI)
+        this.ciTypeService.createCiType(this.newCI, this.fatherID)
             .subscribe(ok => {
                 alert('dodano');
                 this.ciTypeService.change(true);
             }, err => alert('err'));
     }
+
+    addAttributeToCiType() {
+        this.selectedItems.forEach(item => {
+            this.ciTypeService.addAtributeToCiType(this.selectedCiType.id, item.id)
+                .subscribe(next => this.ciTypeService.change(true));
+        });
+    }
 }
 
 export class Attribute {
-    id: number;
+    id: string;
     name: string;
     viewName: string;
     description: string;
-
-    constructor() {
-        this.id = Math.floor(Math.random() * 100000);
-    }
 }
 
 export class CiDTO {
-    id: number;
     name: string;
     description: string;
     viewName: string;
-    attributesCollection: Attribute[];
-
-    constructor() {
-        this.id = Math.floor(Math.random() * 100000);
-        this.attributesCollection = [];
-    }
 }

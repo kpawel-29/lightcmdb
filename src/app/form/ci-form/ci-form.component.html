@@ -2,39 +2,39 @@
     <div class="card">
         <div class="card-header" data-background-color="blue">
             <h4 class="title">{{title}}</h4>
-            <p class="category">Wprowadź dane i atrybuty</p>
+            <p class="category">Wprowadź dane</p>
         </div>
         <div class="card-content">
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group form-black label-floating is-empty">
-                        <label class="control-label">Nazwa</label>
-                        <input type="text" class="form-control"
-                               [(ngModel)]="newCI.name">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group form-black label-floating is-empty">
-                        <label class="control-label">Nazwa wyświetlana</label>
-                        <input type="text" class="form-control"
-                               [(ngModel)]="newCI.viewName">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group form-black label-floating is-empty">
+            <div *ngIf="modalMode === 'createCI'">
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group form-black label-floating is-empty">
-                            <label class="control-label">Opis</label>
-                            <textarea class="form-control" rows="1"
-                                      [(ngModel)]="newCI.description"></textarea>
+                            <label class="control-label">Nazwa</label>
+                            <input type="text" class="form-control"
+                                   [(ngModel)]="newCI.name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-black label-floating is-empty">
+                            <label class="control-label">Nazwa wyświetlana</label>
+                            <input type="text" class="form-control"
+                                   [(ngModel)]="newCI.viewName">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-black label-floating is-empty">
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Opis</label>
+                                <textarea class="form-control" rows="1"
+                                          [(ngModel)]="newCI.description"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
+            <div class="row" *ngIf="modalMode === 'addAttribute'">
                 <div class="col-md-8">
                     <div class="form-group form-black label-floating is-empty"
                          style="margin-top: 12px;">
@@ -52,8 +52,11 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group form-black label-floating is-empty">
-                        <button (click)="openCreateAttribute()" class="btn btn-success btn-group-justified"
+                        <button *ngIf="!addAttribute" (click)="openCreateAttribute()" class="btn btn-success btn-group-justified"
                                 style="display: table-row;"><i class="glyphicon glyphicon-plus"></i> Utwórz atrybut
+                        </button>
+                        <button *ngIf="addAttribute" (click)="openCreateAttribute()" class="btn btn-info btn-group-justified"
+                                style="display: table-row;"><i class="glyphicon glyphicon-minusplus"></i> Ukryj formularz
                         </button>
                     </div>
                 </div>
@@ -66,29 +69,23 @@
                                [(ngModel)]="newAttribute.name">
                     </div>
                 </div>
-                <!--<div class="col-md-3">-->
-                    <!--<div class="form-group form-black label-floating is-empty">-->
-                        <!--<label class="control-label">Opis</label>-->
-                        <!--<input type="text" class="form-control"-->
-                               <!--[(ngModel)]="newAttribute.description">-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-md-3">-->
-                    <!--<div class="form-group form-black label-floating is-empty">-->
-                        <!--<label class="control-label">Nazwa wyświetlana</label>-->
-                        <!--<input type="text" class="form-control"-->
-                               <!--[(ngModel)]="newAttribute.viewName">-->
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="col-md-3">
                     <div class="form-group form-black label-floating is-empty">
-                        <button (click)="createNewAttribute()" class="btn btn-xs btn-secondary"><i class="fa fa-plus"></i>
-                        nowy atrybut</button>
+                        <button (click)="createNewAttribute()" class="btn btn-xs btn-secondary"><i
+                                class="fa fa-plus"></i>
+                            nowy atrybut
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <button (click)="createCi()" type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Zastosuj</button>
+            <button *ngIf="modalMode === 'addAttribute'" (click)="addAttributeToCiType()" type="submit"
+                    class="btn btn-primary pull-right"><i class="fa fa-check"></i> Dodaj
+            </button>
+            <div class="clearfix"></div>
+            <button *ngIf="modalMode === 'createCI'" (click)="createCi()" type="submit"
+                    class="btn btn-primary pull-right"><i class="fa fa-check"></i> Zastosuj
+            </button>
             <div class="clearfix"></div>
 
         </div>

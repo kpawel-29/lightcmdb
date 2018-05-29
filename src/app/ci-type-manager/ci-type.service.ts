@@ -30,15 +30,23 @@ export class CiTypeService {
     }
 
     addAtributeToCiType(ciTypeId: string, attrId: string) {
-
+        return this.http.put(`http://212.237.24.83:8080/dbapi/webresources/citype/${ciTypeId}/addattribute/${attrId}`, null).map(res => res.json());
     }
 
-    createCiType(dto: any) {
-
+    createCiType(dto: any, fatherID: string) {
+        return this.http.post(`http://212.237.24.83:8080/dbapi/webresources/citype?fatherID=${fatherID}`, dto).map(res => res.json());
     }
 
     removeAttribute(id: string): Observable<any> {
         return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/attributes/' + id).map(res => res.json());
+    }
+
+    removeCiType(id: string): Observable<any> {
+        return this.http.delete('http://212.237.24.83:8080/dbapi/webresources/citype/' + id).map(res => res.json());
+    }
+
+    updateCiType(dto: CIType): Observable<any> {
+        return this.http.put('http://212.237.24.83:8080/dbapi/webresources/citype/' + dto.id, dto).map(res => res.json());
     }
 
 }

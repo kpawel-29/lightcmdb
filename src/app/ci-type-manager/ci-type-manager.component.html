@@ -1,23 +1,26 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card card-nav-tabs">
             <div class="card-header" data-background-color="blue">
-                Ci Type Manager
+                <h6>CI Type Manager</h6>
             </div>
-            <div class="card-body">
+            <div class="card-content">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="pull-right">
                             <button (click)="openModal()" class="btn btn-success"><i
-                                    class="glyphicon glyphicon-plus"></i> Dodaj
+                                    class="glyphicon glyphicon-plus"></i> Stwórz Ci Type
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+
                     <div class="col-md-9">
                         <hr>
-                        <table class="table table-striped">
+                        <h5 *ngIf="!selected.name">Wybierz citype</h5>
+                        <h5 *ngIf="selected.id">Szczegóły citype <strong>{{selected.name}}:</strong></h5>
+                        <table *ngIf="selected.id" class="table table-striped animated fadeIn">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -28,13 +31,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let attr of selected.attributesCollection" class="gray-on-hover">
-                                <td>{{attr.id}}</td>
-                                <td>{{attr.name}}</td>
-                                <td>{{attr.viewName}}</td>
-                                <td>{{attr.description}}</td>
+                            <tr>
+                                <td>{{selected.id}}</td>
+                                <td>{{selected.name}}</td>
+                                <td>{{selected.display_name}}</td>
+                                <td>{{selected.description}}</td>
                                 <td>
-                                    <button (click)="removeAttribute(attr.id)"
+                                <td class="text-center">
+                                    <button (click)="openEditCiTypeModal()" class="btn btn-sm btn-primary"><i
+                                            class="material-icons">edit</i></button>
+                                    <button (click)="deleteCiType(selected.id)"
                                             class="btn btn-danger btn-sm text-uppercase"><i
                                             class="material-icons">remove_circle</i></button>
                                 </td>
@@ -53,19 +59,98 @@
                                 (selectedChange)="onSelectedChange($event)"
                         >
                         </ngx-treeview>
-                        <!--<ul class="list-group">-->
-                        <!--<li class="list-group-item" *ngFor="let ci of citypes"-->
-                        <!--[class.list-group-item-success]="selected === ci" (click)="changeSelected(ci)">-->
-                        <!--{{ci.name}}, {{ci.description}}-->
-                        <!--</li>-->
-                        <!--</ul>-->
                     </div>
+                </div>
+                <!--<hr>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="selected.name">
+    <div class="col-md-12">
+        <div class="card card-nav-tabs">
+            <div class="card-header" data-background-color="green">
+                <span>Atrybuty citype <strong>{{selected.name}}:</strong></span>
+            </div>
+            <div class="pull-right">
+                <button (click)="openAddAttributeModal()" class="btn btn-sm btn-primary"><i
+                        class="glyphicon glyphicon-plus"></i> Dodaj atrybut do citype {{selected.name}}
+                </button>
+            </div>
+            <h6 *ngIf="!selected.attributesCollection.length">Zaznaczony citype nie posiada
+                atrybutów</h6>
+            <button *ngIf="!selected.attributesCollection.length"
+                    (click)="openAddAttributeModal()"
+                    class="btn btn-sm btn-primary"><i
+                    class="glyphicon glyphicon-plus"></i> Dodaj atrybut do citype {{selected.name}}
+            </button>
+            <table *ngIf="selected.attributesCollection.length" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nazwa</th>
+                    <th>Nazwa wyświetlana</th>
+                    <th>Opis</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let attr of selected.attributesCollection" class="gray-on-hover">
+                    <td>{{attr.id}}</td>
+                    <td>{{attr.name}}</td>
+                    <td>{{attr.viewName}}</td>
+                    <td>{{attr.description}}</td>
+                    <td>
+                        <button (click)="removeAttribute(attr.id)"
+                                class="btn btn-danger btn-sm text-uppercase"><i
+                                class="material-icons">remove_circle</i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="edit-citype-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">Edycja citype</h4>
+                <p class="category">Wprowadź dane</p>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="col-md-12">
+                        <div class="form-group form-black">
+                            <label class="control-label">ID</label>
+                            <input type="text" class="form-control" disabled
+                                   [(ngModel)]="selected.id">
+                        </div>
+                        <div class="form-group form-black">
+                            <label class="control-label">Name</label>
+                            <input type="text" class="form-control"
+                                   [(ngModel)]="selected.name">
+                        </div>
+                        <div class="form-group form-black">
+                            <label class="control-label">Display name</label>
+                            <input type="text" class="form-control"
+                                   [(ngModel)]="selected.display_name">
+                        </div>
+                        <div class="form-group form-black">
+                            <label class="control-label">Description</label>
+                            <input type="text" class="form-control"
+                                   [(ngModel)]="selected.description">
+                        </div>
+                    </div>
+                    <button (click)="updateCiType()" type="submit" class="btn btn-primary pull-right"><i
+                            class="fa fa-check"></i> Zapisz
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="modal" id="modal-ci-form" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -74,6 +159,9 @@
                 <app-ci-form
                         [title]="modalTitle"
                         [createURI]="createURI"
+                        [fatherID]="rootID"
+                        [modalMode]="modalMode"
+                        [selectedCiType]="selected"
                 ></app-ci-form>
             </div>
         </div>
