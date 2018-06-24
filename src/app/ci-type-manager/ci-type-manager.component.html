@@ -53,12 +53,14 @@
                             <h6>El. konfiguracyjne</h6>
                             <hr/>
                         </div>
-                        <ngx-treeview
-                                [config]="config"
-                                [items]="items"
-                                (selectedChange)="onSelectedChange($event)"
-                        >
-                        </ngx-treeview>
+                        <tree *ngIf="tree" [tree]="tree"
+                              (nodeSelected)="handleSelected($event)"></tree>
+                        <!--<ngx-treeview-->
+                                <!--[config]="config"-->
+                                <!--[items]="items"-->
+                                <!--(selectedChange)="onSelectedChange($event)"-->
+                        <!--&gt;-->
+                        <!--</ngx-treeview>-->
                     </div>
                 </div>
                 <!--<hr>-->

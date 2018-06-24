@@ -5,7 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {NgCytoscapeComponent} from 'ng2-cytoscape/dist/ng2-cytoscape';
-import {TreeviewModule} from 'ngx-treeview';
+import {TreeModule} from 'ng2-tree';
 
 import {AppComponent} from './app.component';
 
@@ -70,7 +70,7 @@ import {SearchComponent} from './search/search.component';
         RouterModule,
         AppRoutingModule,
         AngularMultiSelectModule,
-        TreeviewModule.forRoot()
+        TreeModule
     ],
     providers: [
         SidebarService,
