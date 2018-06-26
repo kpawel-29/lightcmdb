@@ -25,12 +25,12 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>NAME</th>
-        <th>DESCTIPTION</th>
-        <th>EXECUTION</th>
-        <th>INTERVAL</th>
-        <th class="text-center">JOB</th>
-        <th>STATUS</th>
+        <th>Nazwa</th>
+        <th>Opis</th>
+        <th>Wywołanie</th>
+        <th>Częstotliwość</th>
+        <th class="text-center">Zadanie</th>
+        <th>Status</th>
         <th></th>
     </tr>
     </thead>
@@ -48,8 +48,8 @@
             </button>
             <ul style="text-align: left;" *ngFor="let job of scheduler.job">
                 <li><strong>id: </strong>{{job.id}}</li>
-                <li><strong>name: </strong>{{job.name}}</li>
-                <li><strong>description: </strong>{{job.description}}</li>
+                <li><strong>nazwa: </strong>{{job.name}}</li>
+                <li><strong>opis: </strong>{{job.description}}</li>
             </ul>
         </td>
         <td>
@@ -85,12 +85,12 @@
                                        [(ngModel)]="selectedProbeId">
                             </div>
                             <div class="form-group form-black">
-                                <label class="control-label">Name</label>
+                                <label class="control-label">Nazwa</label>
                                 <input type="text" class="form-control"
                                        [(ngModel)]="newScheduler.name">
                             </div>
                             <div class="form-group form-black">
-                                <label class="control-label">Description</label>
+                                <label class="control-label">Opis</label>
                                 <input type="text" class="form-control"
                                        [(ngModel)]="newScheduler.description">
                             </div>

@@ -5,9 +5,9 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th class="text-center">NAME</th>
-        <th class="text-center">IP RANGE</th>
-        <th class="text-center">SCHEDULER</th>
+        <th class="text-center">Nazwa</th>
+        <th class="text-center">Zakres IP</th>
+        <th class="text-center">Terminarz</th>
         <th class="text-center"></th>
     </tr>
     </thead>
@@ -22,7 +22,7 @@
             </button>
             <ul style="text-align: left;" *ngFor="let ip of probe.iprange">
                 <li><strong>id: </strong>{{ip.id}}</li>
-                <li><strong>name: </strong>{{ip.name}}</li>
+                <li><strong>nazwa: </strong>{{ip.name}}</li>
                 <li><strong>start: </strong>{{ip.start}}</li>
                 <li><strong>stop: </strong>{{ip.stop}}</li>
                 <li>
@@ -36,8 +36,8 @@
         <td class="text-center">
             <ul style="text-align: left;" *ngFor="let sch of probe.scheduler">
                 <li><strong>id: </strong>{{sch.id}}</li>
-                <li><strong>name: </strong>{{sch.name}}</li>
-                <li><strong>description: </strong>{{sch.description}}</li>
+                <li><strong>nazwa: </strong>{{sch.name}}</li>
+                <li><strong>opis: </strong>{{sch.description}}</li>
                 <li><strong>status: </strong>{{sch.status}}</li>
                 <li><strong>execution: </strong>{{sch.execution}}</li>
                 <li><strong>interval: </strong>{{sch.interval}}</li>
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group form-black ">
-                                <label class="control-label">Name</label>
+                                <label class="control-label">Nazwa</label>
                                 <input type="text" class="form-control"
                                        [(ngModel)]="newProbe.name">
                             </div>
@@ -90,7 +90,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group form-black">
-                                <label class="control-label">Name</label>
+                                <label class="control-label">Nazwa</label>
                                 <input type="text" class="form-control"
                                        [(ngModel)]="newProbe.name">
                             </div>
@@ -122,7 +122,7 @@
                                        [(ngModel)]="dtoIprange.id" disabled>
                             </div>
                             <div class="form-group form-black">
-                                <label class="control-label">Name</label>
+                                <label class="control-label">Nazwa</label>
                                 <input type="text" class="form-control"
                                        [(ngModel)]="dtoIprange.name">
                             </div>

@@ -6,7 +6,7 @@
         </div>
         <div class="card-content">
             <div class="row" *ngIf="citypes">
-                <label class="col-md-3 margin-top-15">CI TYPE</label>
+                <label class="col-md-3 margin-top-15">Typ CI</label>
                 <div class="col-md-9">
                     <select (change)="ciTypeSelected($event, ciType.value)" #ciType class="form-control form-control-margin" name="end_hour" id="ciTypeSelect">
                         <option value="Wybierz"></option>
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="row animated fadeIn" *ngIf="attributes && newMapping.ciTypeID">
-                <label class="col-md-3 margin-top-15">ATTRIBUTE</label>
+                <label class="col-md-3 margin-top-15">Atrybut</label>
                 <div class="col-md-9">
                     <select (change)="attributeSelected($event, attr.value)" #attr class="form-control form-control-margin" name="end_hour" id="attributesSelect">
                         <option value="Wybierz"></option>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="row animated fadeIn" *ngIf="tasks && newMapping.ciTypeID">
-                <label class="col-md-3 margin-top-15">TASK</label>
+                <label class="col-md-3 margin-top-15">Task</label>
                 <div class="col-md-5">
                     <select (change)="taskSelected($event, task.value)" #task class="form-control form-control-margin" name="end_hour" id="taskSelect">
                         <option value="Wybierz"></option>
@@ -48,21 +48,21 @@
             <div *ngIf="addTask" class="row animated fadeIn" style="border: 2px dashed #999;">
                 <div class="col-md-6">
                     <div class="form-group form-black label-floating is-empty">
-                        <label class="control-label">Name</label>
+                        <label class="control-label">Nazwa</label>
                         <input type="text" class="form-control"
                                [(ngModel)]="newTask.name">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group form-black label-floating is-empty">
-                        <label class="control-label">Command</label>
+                        <label class="control-label">Komenda</label>
                         <input type="text" class="form-control"
                                [(ngModel)]="newTask.command">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group form-black label-floating is-empty">
-                        <label class="control-label">Job type</label>
+                        <label class="control-label">Typ zadania</label>
                         <input type="text" class="form-control"
                                [(ngModel)]="newTask.jobType">
                     </div>
@@ -77,13 +77,13 @@
                 <div class="col-md-2">
                     <div class="form-group form-black label-floating is-empty">
                         <button (click)="createNewTask()" class="btn btn-sm btn-secondary btn-outline"><i class="fa fa-plus"></i>
-                        nowy task</button>
+                        Nowy task</button>
                     </div>
                 </div>
             </div>
 
             <button (click)="addMapping()" type="submit" class="btn btn-primary pull-right"><i
-                    class="fa fa-check"></i> dodaj
+                    class="fa fa-check"></i> Dodaj
             </button>
             <div class="clearfix"></div>
 
