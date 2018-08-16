@@ -5,14 +5,14 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         path: '/ci-type-manager',
         title: 'Ci Type Manager',
         icon: 'dashboard'
-    }, {
-        // path: '/relations',
-        // title: 'Relationship Manager',
-        // icon: 'person'
     // }, {
-        path: '/infrastructure-settings',
-        title: 'Infrastructure Settings',
-        icon: 'content_paste'
+    //     path: '/relations',
+    //     title: 'Relationship Manager',
+    //     icon: 'person'
+    // }, {
+    //     path: '/infrastructure-settings',
+    //     title: 'Infrastructure Settings',
+    //     icon: 'content_paste'
     }, {
         path: '/configuration',
         title: 'Configuration',
@@ -21,9 +21,9 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         path: '/discovery',
         title: 'Discovery',
         icon: 'library_books'
-    }, {
-        path: '/search',
-        title: 'Search',
-        icon: 'search'
+    // }, {
+    //     path: '/search',
+    //     title: 'Search',
+    //     icon: 'search'
     }
 ];
