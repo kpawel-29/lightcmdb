@@ -21,10 +21,10 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         path: '/discovery',
         title: 'Discovery',
         icon: 'library_books'
-    }, {
-        path: '/search',
-        title: 'Search',
-        icon: 'search'
+    // }, {
+    //     path: '/search',
+    //     title: 'Search',
+    //     icon: 'search'
     }
 ];
 // relacje między ci typami i  graf z relacjami
