@@ -36,7 +36,9 @@ import {InfrastructureSettingsComponent} from './infrastructure-settings/infrast
 import {ItUniverseManagerComponent} from './it-universe-manager/it-universe-manager.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {RelationsComponent} from './relations/relations.component';
+import {ScanService} from './scan/scan.service';
 import {SearchComponent} from './search/search.component';
+import { ScanComponent } from './scan/scan.component';
 
 @NgModule({
     declarations: [
@@ -61,7 +63,8 @@ import {SearchComponent} from './search/search.component';
         ProbeComponent,
         IprangeFormComponent,
         ConfigurationComponent,
-        IprangeComponent
+        IprangeComponent,
+        ScanComponent
     ],
     imports: [
         BrowserModule,
@@ -78,7 +81,8 @@ import {SearchComponent} from './search/search.component';
         AuthGuard,
         CiTypeService,
         DiscoveryService,
-        ConfigurationService
+        ConfigurationService,
+        ScanService
     ],
     bootstrap: [AppComponent]
 })

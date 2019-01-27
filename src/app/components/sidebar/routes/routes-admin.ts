@@ -21,6 +21,10 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         path: '/discovery',
         title: 'Discovery',
         icon: 'library_books'
+    }, {
+        path: '/scan',
+        title: 'Scan History',
+        icon: 'search'
     // }, {
     //     path: '/search',
     //     title: 'Search',

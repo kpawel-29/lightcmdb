@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-nav-tabs">
+            <div class="card-header" data-background-color="blue">
+                <h6>Scan history</h6>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table *ngIf="scanHistory.length" class="table table-striped animated fadeIn">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nazwa</th>
+                                <th>Typ</th>
+                                <th>Data zapisu</th>
+                                <th>Uzyskana wartość</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let scan of scanHistory">
+                                <td>{{scan.id}}</td>
+                                <td>{{scan.dataname}}</td>
+                                <td>{{scan.datatype}}</td>
+                                <td>{{scan.recorddate}}</td>
+                                <td>{{scan.value}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

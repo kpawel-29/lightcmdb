@@ -10,6 +10,7 @@ import {ConfigurationComponent} from './configuration/configuration.component';
 import {RelationsComponent} from './relations/relations.component';
 import {InfrastructureSettingsComponent} from './infrastructure-settings/infrastructure-settings.component';
 import {DiscoveryComponent} from './discovery/discovery.component';
+import {ScanComponent} from './scan/scan.component';
 import {SearchComponent} from './search/search.component';
 
 const routes: Routes = [
@@ -40,6 +41,10 @@ const routes: Routes = [
     }, {
         path: 'discovery',
         component: DiscoveryComponent,
+        canActivate: [AuthGuard]
+    }, {
+        path: 'scan',
+        component: ScanComponent,
         canActivate: [AuthGuard]
     }
 ];
