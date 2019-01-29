@@ -129,8 +129,8 @@
                 <tr *ngFor="let ci of ciCollection" class="gray-on-hover">
                     <td>{{ci.id}}</td>
                     <td>
-                        <div *ngFor="let a of ci.attributes | pairs">
-                            <strong>{{a[0]}}</strong>: {{a[1]}}
+                        <div *ngFor="let a of ci.attributes | keys">
+                            <strong>{{a.key}}</strong>: {{a.value}}
                         </div>
                     </td>
                 </tr>

@@ -6,7 +6,6 @@ import {RouterModule} from '@angular/router';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {NgCytoscapeComponent} from 'ng2-cytoscape/dist/ng2-cytoscape';
 import {TreeModule} from 'ng2-tree';
-import {NgPipesModule} from 'ngx-pipes';
 
 import {AppComponent} from './app.component';
 
@@ -36,6 +35,7 @@ import {MappingFormComponent} from './form/mapping-form/mapping-form.component';
 import {InfrastructureSettingsComponent} from './infrastructure-settings/infrastructure-settings.component';
 import {ItUniverseManagerComponent} from './it-universe-manager/it-universe-manager.component';
 import {NavbarComponent} from './navbar/navbar.component';
+import {KeysPipe} from './pipe/Keys.pipe';
 import {RelationsComponent} from './relations/relations.component';
 import {ScanService} from './scan/scan.service';
 import {SearchComponent} from './search/search.component';
@@ -65,7 +65,8 @@ import { ScanComponent } from './scan/scan.component';
         IprangeFormComponent,
         ConfigurationComponent,
         IprangeComponent,
-        ScanComponent
+        ScanComponent,
+        KeysPipe
     ],
     imports: [
         BrowserModule,
@@ -75,7 +76,6 @@ import { ScanComponent } from './scan/scan.component';
         AppRoutingModule,
         AngularMultiSelectModule,
         TreeModule,
-        NgPipesModule
     ],
     providers: [
         SidebarService,
