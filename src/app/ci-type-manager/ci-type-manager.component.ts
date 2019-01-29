@@ -16,6 +16,7 @@ export class CiTypeManagerComponent implements OnInit {
     public citypes: CIType[] = [];
     public types: string[] = [];
     public ciCollection = null;
+    public rootID = null;
 
     selected = new CIType();
     createURI = 'http://212.237.24.83:8080/dbapi/webresources/citype';
@@ -108,6 +109,7 @@ export class CiTypeManagerComponent implements OnInit {
 
     buildTree() {
         const root = this.getRoot();
+        this.rootID = root.id;
 
         this.tree = {
             value: root.name,

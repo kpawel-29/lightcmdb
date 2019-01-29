@@ -133,4 +133,5 @@ export class CiDTO {
     name: string;
     description: string;
     viewName: string;
+    keyID: string;
 }
