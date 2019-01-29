@@ -52,10 +52,66 @@
     <div class="modal-dialog modal-lg">
         <div class="">
             <div class="modal-body">
-                <app-ci-form
-                        [title]="modalTitle"
-                        [createURI]="createURI"
-                ></app-ci-form>
+                <div class="card">
+                    <div class="card-header" data-background-color="blue">
+                        <h4 class="title">Tworzenie typu relacji</h4>
+                        <p class="category">Wprowadź dane</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="row" *ngIf="citypes">
+                            <label class="col-md-3 margin-top-15">Source</label>
+                            <div class="col-md-9">
+                                <select (change)="ciTypeSourceSelected($event, ciType.value)" #ciType class="form-control form-control-margin" name="end_hour" id="ciTypeSelect">
+                                    <option value="Wybierz"></option>
+                                    <option *ngFor="let ciType of citypes" value={{ciType.id}}>
+                                        {{ciType.name}}; {{ciType.description}}; {{ciType.id}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="citypes">
+                            <label class="col-md-3 margin-top-15">Destination</label>
+                            <div class="col-md-9">
+                                <select (change)="ciTypeDestinationSelected($event, ciType.value)" #ciType class="form-control form-control-margin" name="end_hour" id="ciTypeSelect">
+                                    <option value="Wybierz"></option>
+                                    <option *ngFor="let ciType of citypes" value={{ciType.id}}>
+                                        {{ciType.name}}; {{ciType.description}}; {{ciType.id}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Nazwa</label>
+                                    <input type="text" class="form-control"
+                                           [(ngModel)]="newRelationDto.name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Typ</label>
+                                    <input type="text" class="form-control"
+                                           [(ngModel)]="newRelationDto.type">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label class="control-label">Opis</label>
+                                        <textarea class="form-control" rows="1"
+                                                  [(ngModel)]="newRelationDto.description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button (click)="createRelation()" type="submit"
+                                class="btn btn-primary pull-right"><i class="fa fa-check"></i> Dodaj
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

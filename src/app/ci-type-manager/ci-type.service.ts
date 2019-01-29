@@ -5,6 +5,7 @@ import {Subject} from "rxjs/Subject";
 import {Attribute} from '../model/Attribute';
 import {CIType} from '../model/CIType';
 import {Relation} from '../model/Relation';
+import {RelationDto} from '../model/RelationDto';
 
 @Injectable()
 export class CiTypeService {
@@ -52,6 +53,10 @@ export class CiTypeService {
 
     relationTypes(): Observable<Relation[]> {
         return this.http.get('http://212.237.24.83:8080/dbapi/webresources/relationshiptype').map(res => res.json());
+    }
+
+    createRelationType(dto: RelationDto, sourceID: string, destinationID: string): Observable<any> {
+        return this.http.post(`http://212.237.24.83:8080/dbapi/webresources/relationshiptype?SourceID=${sourceID}&DestinationID=${destinationID}`, dto).map(res => res.json());
     }
 
     getCiOfType(typeName: string): Observable<any> {

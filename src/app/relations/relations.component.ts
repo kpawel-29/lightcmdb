@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CiTypeService} from "../ci-type-manager/ci-type.service";
+import {CIType} from '../model/CIType';
 import {Relation} from '../model/Relation';
+import {RelationDto} from '../model/RelationDto';
 
 declare const $: any;
 declare const vis: any;
@@ -18,6 +20,12 @@ export class RelationsComponent implements OnInit {
     createURI = 'http://212.237.24.83:8080/dbapi/webresources/relationshiptype';
     modalTitle = 'Utwórz nową relację';
 
+    public newRelationDto = new RelationDto();
+    private sourceID = null;
+    private destinationID = null;
+
+    public citypes: CIType[] = [];
+
     constructor(private ciTypeService: CiTypeService) {
     }
 
@@ -34,6 +42,7 @@ export class RelationsComponent implements OnInit {
             }, err => {
                 alert('błąd podczas pobierania listy relacji');
             });
+        this.ciTypeService.ciTypes().subscribe(next => this.citypes = next);
     }
 
     openModal() {
@@ -75,5 +84,23 @@ export class RelationsComponent implements OnInit {
         return [
             {from: 1, to: 2, label: this.selected.type},
         ];
+    }
+
+    ciTypeSourceSelected(event: any, value: any) {
+        this.sourceID = value;
+    }
+    ciTypeDestinationSelected(event: any, value: any) {
+        this.destinationID = value;
+    }
+
+    createRelation() {
+        this.ciTypeService.createRelationType(this.newRelationDto, this.sourceID, this.destinationID).subscribe(
+            next => {
+                alert('dodano');
+                this.getRelations();
+            }, err => {
+                alert('Błąd podczas tworzenia typu relacji');
+            }
+        );
     }
 }

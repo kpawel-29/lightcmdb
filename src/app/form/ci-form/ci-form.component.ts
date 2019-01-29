@@ -111,7 +111,7 @@ export class CiFormComponent implements OnInit {
             .subscribe(ok => {
                 alert('dodano');
                 this.ciTypeService.change(true);
-            }, err => alert('err'));
+            }, err => alert('Błąd podczas tworzenia obiektu'));
     }
 
     addAttributeToCiType() {
