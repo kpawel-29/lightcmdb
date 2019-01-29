@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Http} from "@angular/http";
 import {TreeModel} from 'ng2-tree';
-// import {OrderDownlineTreeviewEventParser, TreeviewComponent, TreeviewEventParser, TreeviewItem} from 'ngx-treeview';
 import {CIType} from '../model/CIType';
 import {CiTypeService} from "./ci-type.service";
 
@@ -11,33 +10,20 @@ declare var $: any;
     selector: 'app-ci-type-manager',
     templateUrl: './ci-type-manager.component.html',
     styleUrls: ['./ci-type-manager.component.css'],
-    // providers: [
-    //     {provide: TreeviewEventParser, useClass: OrderDownlineTreeviewEventParser}
-    // ]
 })
 export class CiTypeManagerComponent implements OnInit {
 
     public citypes: CIType[] = [];
     public types: string[] = [];
+    public ciCollection = null;
 
     selected = new CIType();
     createURI = 'http://212.237.24.83:8080/dbapi/webresources/citype';
     modalTitle = 'Utwórz nowy CI';
-    // rootID: string;
-    // items: TreeviewItem[] = [];
-    // config = {
-    //     hasAllCheckBox: false,
-    //     hasFilter: false,
-    //     hasCollapseExpand: false,
-    //     decoupleChildFromParent: true,
-    //     maxHeight: 500
-    // };
 
     public tree: TreeModel;
 
     modalMode = 'createCI';
-
-    // @ViewChild(TreeviewComponent) tree: TreeviewComponent;
 
     constructor(private ciTypeService: CiTypeService,
                 private http: Http) {
@@ -113,6 +99,7 @@ export class CiTypeManagerComponent implements OnInit {
             return;
         }
         this.selected = this.citypes.find(ci => ci.id === event.node.node.id);
+        this.loadCIOfType(this.selected.name);
     }
 
     getRoot(): CIType {
@@ -128,5 +115,29 @@ export class CiTypeManagerComponent implements OnInit {
             children: this.getChildren(root.id)
         };
 
+    }
+
+    loadCIOfType(type: string) {
+        this.ciTypeService.getCiOfType(type).subscribe(
+            next => {
+                this.ciCollection = this.parseCIcollection(next);
+                // debugger;
+            },
+            err => alert('Błąd pobierania CI typu ' + type)
+        );
+    }
+
+    parseCIcollection(object) {
+        const data = [];
+        for (const property in object) {
+            if (object.hasOwnProperty(property)) {
+                const item = {id: null, attributes: {}};
+                item.id = property;
+                item.attributes = object[property];
+
+                data.push(item);
+            }
+        }
+        return data;
     }
 }

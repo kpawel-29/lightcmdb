@@ -69,7 +69,7 @@
     </div>
 </div>
 <div class="row animated fadeIn" *ngIf="selected.name">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="card card-nav-tabs">
             <div class="card-header" data-background-color="green">
                 <span>Atrybuty citype <strong>{{selected.name}}:</strong></span>
@@ -106,6 +106,32 @@
                         <button (click)="removeAttribute(attr.id)"
                                 class="btn btn-danger btn-sm text-uppercase"><i
                                 class="material-icons">remove_circle</i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-nav-tabs">
+            <div class="card-header" data-background-color="purple">
+                <span>CI typu <strong>{{selected.name}}:</strong></span>
+            </div>
+            <h6 *ngIf="ciCollection && !ciCollection.length">Nie znaleziono CI danego typu</h6>
+            <table *ngIf="ciCollection && ciCollection.length" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Atrybuty</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let ci of ciCollection" class="gray-on-hover">
+                    <td>{{ci.id}}</td>
+                    <td>
+                        <div *ngFor="let a of ci.attributes | pairs">
+                            <strong>{{a[0]}}</strong>: {{a[1]}}
+                        </div>
                     </td>
                 </tr>
                 </tbody>

@@ -38,6 +38,7 @@
     "moment": "2.18.1",
     "ng2-cytoscape": "^0.4.0",
     "ng2-tree": "2.0.0-alpha.8",
+    "ngx-pipes": "^2.3.9",
     "path": "^0.12.7",
     "perfect-scrollbar": "1.1.0",
     "rxjs": "^5.5.11",

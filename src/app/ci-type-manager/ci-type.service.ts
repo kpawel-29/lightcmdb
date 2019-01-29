@@ -54,4 +54,7 @@ export class CiTypeService {
         return this.http.get('http://212.237.24.83:8080/dbapi/webresources/relationshiptype').map(res => res.json());
     }
 
+    getCiOfType(typeName: string): Observable<any> {
+        return this.http.get(`http://212.237.24.83:8080/dbapi/webresources/data/${typeName}`).map(res => res.json());
+    }
 }

@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {NgCytoscapeComponent} from 'ng2-cytoscape/dist/ng2-cytoscape';
 import {TreeModule} from 'ng2-tree';
+import {NgPipesModule} from 'ngx-pipes';
 
 import {AppComponent} from './app.component';
 
@@ -73,7 +74,8 @@ import { ScanComponent } from './scan/scan.component';
         RouterModule,
         AppRoutingModule,
         AngularMultiSelectModule,
-        TreeModule
+        TreeModule,
+        NgPipesModule
     ],
     providers: [
         SidebarService,
